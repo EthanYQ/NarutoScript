@@ -94,6 +94,20 @@ def show_and_choose():
     return resolve_config_name(choice)
 
 
+def launch_gui(arg=1):
+    """
+    Resolve config by index/name and launch the web GUI with auto-run.
+    Called from start.bat with a numeric index (no Chinese in batch).
+
+    Usage:
+        python -c "from run_config import launch_gui; launch_gui(1)"
+    """
+    config_name = resolve_config_name(str(arg))
+    print(f"[NarutoScript] Launching GUI with config: {config_name}")
+    import subprocess
+    subprocess.run([sys.executable, "gui.py", "--run", config_name])
+
+
 def main():
     if len(sys.argv) < 2:
         config_name = show_and_choose()
